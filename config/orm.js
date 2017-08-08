@@ -1,42 +1,39 @@
-const connection = require('./connection.js');
+const connections = require('./connections.js');
 
 const orm = {
+  //shows all entries from burgers_db
   selectAll: function(tableInput, callback) {
-    
-    var queryString = "SELECT * FROM ?? WHERE ??";
-    connection.query(queryString, [tableInput], function(err, result) {
+    console.log(tableInput);
+    var queryString = "SELECT * FROM ? WHERE ?";
+    connections.query(queryString, [tableInput], function(err, result) {
       if (err) {
         throw err;
+        callback(result);
       }
       console.log(result);
     });
   },
 
-  //INSERT INTO burgers_db (burger_name, devoured, burger_date)
-  insertOne: function(tableInput, colToSearch, valOfCol) {
-    var queryString = "INSERT INTO burgers  FROM ?? WHERE ?? = ?";
+//   //INSERT INTO burgers_db (burger_name, devoured, burger_date)
+// insertOne: function(tableInput, colToSearch, valOfCol) {
+//   var queryString = "INSERT INTO burgers SET ? WHERE ?";
 
+//     connections.query(queryString, [tableInput, colToSearch, valOfCol], function(err, result) {
+//       console.log(result);
+//     });
+//   },
+//   updateOne: function(whatToSelect, tableOne, tableTwo, onTableOneCol, onTableTwoCol) {
+//     var queryString = "UPDATE burgers SET ? WHERE ?";
+//     queryString = queryString + " ....";
+//     queryString = queryString + " ....";
 
+//     console.log(queryString);
 
-
-    console.log(queryString);
-
-    connection.query(queryString, [tableInput, colToSearch, valOfCol], function(err, result) {
-      console.log(result);
-    });
-  },
-  updateOne: function(whatToSelect, tableOne, tableTwo, onTableOneCol, onTableTwoCol) {
-    var queryString = "UPDATE burgers SET ? WHERE ?";
-    queryString = queryString + " ....";
-    queryString = queryString + " ....";
-
-    console.log(queryString);
-
-    connection.query(queryString, [whatToSelect, tableOne, tableTwo, onTableOneCol, onTableTwoCol], function(err, result) {
-      console.log(result);
-    });
-  }
-};
+//     connections.query(queryString, [whatToSelect, tableOne, tableTwo, onTableOneCol, onTableTwoCol], function(err, result) {
+//       console.log(result);
+//     });
+//   }
+// };
 
 module.exports = orm;
 
